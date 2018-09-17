@@ -1,33 +1,30 @@
 <?php
-/**
- * This is the Front Controller.
- * The Front Controller decides which action to run.
- *
- * This particular Front Controller defines a route table, which says
- * which defines which URLs map to which actions.
- *
- * @author Damien Walsh <me@damow.net>
- */
+
 require_once 'vendor/autoload.php';
+//require_once  'model/db.php';
 
 // Define the routes table
+$defaultAction = "indexAction";
 $routes = array(
-    '/\/hello\/(.+)/' => array('HelloController', 'helloAction')
+    '/\/hello\/(.+)/' => array('HelloController', 'helloAction'),
+	'/\/account\//' => array('AccountController', 'indexAction'),
+    '/\/account\/registration/' => array('AccountController', 'registrationAction'),
 );
 
-// Decide which route to run
+
 foreach ($routes as $url => $action) {
-
-    // See if the route matches the current request
     $matches = preg_match($url, $_SERVER['REQUEST_URI'], $params);
-
-    // If it matches...
     if ($matches > 0) {
-
-        // Run this action, passing the parameters.
+        var_dump($action);
         $controller = new $action[0];
         $controller->{$action[1]}($params);
-
         break;
     }
+//    else
+//    {
+//        $controller = new NotFoundController();
+//        $controller->indexAction();
+//        header('Location: /php');
+//    }
+
 }
