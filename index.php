@@ -1,29 +1,33 @@
 <?php
 
 require_once 'vendor/autoload.php';
-//require_once 'controller/HelloController.php';
-//require_once  'model/db.php';
+
+define('BASE_URL', '/php/');
 
 
-   // $matches = preg_match($url, $_SERVER['REQUEST_URI'], $params);
 $path = str_replace('/php/', '', $_SERVER['REQUEST_URI']);
 $parts = array_filter(explode('/', $path));
+
 if (!count($parts))
 {
-    $parts[0] = 'hello';
-    $parts[1] = 'hello';
+    $parts[0] = 'index';
+    $parts[1] = 'index';
 }
 $params = array_slice($parts, 2);
-$temp = mb_convert_case($parts[0], MB_CASE_TITLE, "UTF-8");
-$temp .= 'Controller';
+$controllerRoute = mb_convert_case($parts[0], MB_CASE_TITLE, "UTF-8");
+$controllerRoute .= 'Controller';
 
-if (!class_exists($temp)) {
-    $temp = 'NotFoundController';
+if (!class_exists($controllerRoute)) {
+    $controllerRoute = 'NotFoundController';
 }
-$controller = new $temp();
+$controller = new $controllerRoute();
 
-$action =  $parts[1].'Action';
-if (!method_exists($temp, $action)) {
+if (!isset($parts[1]))
+    $action = 'indexAction';
+else
+    $action =  $parts[1].'Action';
+
+if (!method_exists($controllerRoute, $action)) {
     $action = 'indexAction';
 }
 

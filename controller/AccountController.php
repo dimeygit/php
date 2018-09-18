@@ -9,9 +9,9 @@ class AccountController
 
     public function registrationAction()
     {
-        var_dump(1); exit;
+
         //include 'view/registerView.php';
-        //include 'view/registerView.php';
+        header ('Location: ' . BASE_URL );
     }
 }
 

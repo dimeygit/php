@@ -5,7 +5,7 @@
  *
  * @author Damien Walsh <me@damow.net>
  */
-class HelloController
+class IndexController
 {
     /**
      * Say hello to a person.
@@ -18,7 +18,7 @@ class HelloController
      *
      * @param array $params The parameters from the URL.
      */
-    public function helloAction($params)
+    public function indexAction($params)
     {
         // Find the requested person in the database
         //$person = Person::findByColumn('id', $params[1]);
