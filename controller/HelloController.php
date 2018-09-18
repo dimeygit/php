@@ -21,7 +21,7 @@ class HelloController
     public function helloAction($params)
     {
         // Find the requested person in the database
-        $person = Person::findByColumn('id', $params[1]);
+        //$person = Person::findByColumn('id', $params[1]);
 
         // Render the helloView view
         include 'view/helloView.php';

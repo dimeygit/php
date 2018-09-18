@@ -18,14 +18,13 @@ $temp = mb_convert_case($parts[0], MB_CASE_TITLE, "UTF-8");
 $temp .= 'Controller';
 
 if (!class_exists($temp)) {
-    var_dump(404); exit;
+    $temp = 'NotFoundController';
 }
-
 $controller = new $temp();
-$action =  $parts[1].'Action';
 
+$action =  $parts[1].'Action';
 if (!method_exists($temp, $action)) {
-    var_dump(404); exit;
+    $action = 'indexAction';
 }
 
 $controller->{$action}($params);
